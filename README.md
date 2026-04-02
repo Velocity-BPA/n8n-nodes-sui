@@ -8,25 +8,25 @@
 >
 > For licensing information, visit https://velobpa.com/licensing or contact licensing@velobpa.com.
 
-This n8n community node provides comprehensive integration with the Sui blockchain network, enabling automated interactions with 7 core resources including Transactions, Objects, Addresses, Validators, Packages, and System operations. Build powerful blockchain automation workflows with support for querying transaction history, managing digital objects, monitoring validator performance, and executing smart contract interactions.
+An n8n community node for interacting with the Sui blockchain ecosystem. This node provides access to 7 key resources including transactions, objects, coins, validators, network information, events, and packages, enabling comprehensive blockchain automation workflows.
 
 ![n8n Community Node](https://img.shields.io/badge/n8n-Community%20Node-blue)
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
-![Sui Network](https://img.shields.io/badge/Sui-Blockchain-6FBCF0)
-![Move Language](https://img.shields.io/badge/Move-Smart%20Contracts-FF6B35)
-![Web3](https://img.shields.io/badge/Web3-Integration-4E9F3D)
+![Blockchain](https://img.shields.io/badge/Blockchain-Sui-6fbcf0)
+![Web3](https://img.shields.io/badge/Web3-Compatible-orange)
+![DeFi](https://img.shields.io/badge/DeFi-Enabled-green)
 
 ## Features
 
-- **Transaction Management** - Query, submit, and monitor Sui blockchain transactions with detailed status tracking
-- **Object Operations** - Retrieve and manage Sui objects including NFTs, coins, and custom Move objects
-- **Address Analytics** - Fetch address balances, transaction history, and owned objects for comprehensive wallet analysis  
-- **Validator Monitoring** - Access validator information, staking details, and network performance metrics
-- **Package Interaction** - Query Move packages, modules, and smart contract metadata for dApp integration
-- **System Information** - Retrieve network status, epoch data, and blockchain configuration details
-- **Flexible Authentication** - Secure API key-based authentication with support for multiple network endpoints
-- **Error Handling** - Comprehensive error management with detailed blockchain-specific error messages
+- **Transaction Management** - Create, submit, and query blockchain transactions with full lifecycle support
+- **Object Operations** - Retrieve and interact with on-chain objects, including dynamic object fields
+- **Coin Management** - Handle coin transfers, balance queries, and multi-coin operations
+- **Validator Monitoring** - Access validator information, staking data, and network governance details
+- **Network Analytics** - Retrieve network statistics, protocol configuration, and system state information
+- **Event Tracking** - Query and filter blockchain events with advanced search capabilities
+- **Package Interaction** - Access Move package data, module information, and smart contract interfaces
+- **Real-time Integration** - Enable automated workflows triggered by blockchain state changes
 
 ## Installation
 
@@ -61,124 +61,134 @@ n8n start
 
 | Field | Description | Required |
 |-------|-------------|----------|
-| API Key | Sui RPC API key for authenticated requests | Yes |
-| Environment | Network environment (mainnet, testnet, devnet) | Yes |
-| RPC Endpoint | Custom RPC endpoint URL (optional) | No |
-| Timeout | Request timeout in milliseconds (default: 30000) | No |
+| API Key | Your Sui RPC endpoint API key for authenticated requests | Yes |
+| RPC URL | Custom RPC endpoint URL (defaults to Sui mainnet if not specified) | No |
+| Network | Target network (mainnet, testnet, devnet) | No |
 
 ## Resources & Operations
 
-### 1. Transactions
+### 1. Transaction
 
 | Operation | Description |
 |-----------|-------------|
-| Get Transaction | Retrieve transaction details by transaction digest |
-| Get Transactions | Query multiple transactions with filtering options |
-| Execute Transaction | Submit and execute a transaction on the Sui network |
-| Get Transaction Block | Fetch transaction block data with execution details |
-| Multi Get Transactions | Retrieve multiple transactions in a single request |
-| Query Transaction Blocks | Search transaction blocks with advanced filtering |
+| Get Transaction | Retrieve transaction details by digest |
+| Submit Transaction | Submit a signed transaction to the network |
+| Execute Transaction | Execute a transaction with automatic signing |
+| Get Transaction Block | Get detailed transaction block information |
+| Multi Get Transactions | Retrieve multiple transactions in batch |
+| Query Transactions | Query transactions with filters and pagination |
 
-### 2. Objects
-
-| Operation | Description |
-|-----------|-------------|
-| Get Object | Retrieve object data by object ID |
-| Get Objects | Fetch multiple objects in batch |
-| Get Object Details | Get detailed object information including type and content |
-| Query Objects | Search objects with filtering criteria |
-| Get Dynamic Fields | Retrieve dynamic fields for a specific object |
-| Get Dynamic Field Object | Fetch dynamic field object data |
-
-### 3. Addresses
+### 2. Object
 
 | Operation | Description |
 |-----------|-------------|
-| Get Address Balance | Retrieve balance information for a specific address |
-| Get All Balances | Fetch all coin balances for an address |
-| Get Coins | Get coin objects owned by an address |
-| Get Objects Owned | Retrieve all objects owned by an address |
-| Get Transaction Blocks | Get transaction history for an address |
-| Get Stakes | Retrieve staking information for an address |
+| Get Object | Retrieve object data by ID |
+| Multi Get Objects | Get multiple objects in a single request |
+| Get Objects Owned By Address | List all objects owned by a specific address |
+| Get Dynamic Fields | Retrieve dynamic fields of an object |
+| Get Dynamic Field Object | Get specific dynamic field object data |
+| Try Get Past Object | Attempt to retrieve historical object state |
 
-### 4. Validators
+### 3. Coin
+
+| Operation | Description |
+|-----------|-------------|
+| Get Coins | List coins owned by an address |
+| Get All Coins | Retrieve all coin types for an address |
+| Get Coin Metadata | Get metadata for a specific coin type |
+| Get Total Supply | Retrieve total supply information for a coin |
+| Select Coins | Select optimal coins for transaction input |
+| Get Balance | Get balance for specific coin types |
+| Get All Balances | Retrieve balances for all coin types |
+
+### 4. Validator
 
 | Operation | Description |
 |-----------|-------------|
 | Get Validators | Retrieve current validator set information |
-| Get Latest Sui System State | Fetch the latest system state including validator details |
-| Get Stakes By IDs | Get stake information by validator IDs |
-| Get Committee Info | Retrieve committee information for current epoch |
+| Get Latest Sui System State | Get current system state and validator data |
+| Get Validator APY | Retrieve validator annual percentage yield |
+| Get Committee Info | Get committee information for current epoch |
+| Get Stakes | List staking information for an address |
+| Get Stakes By IDs | Get specific stake objects by IDs |
 
-### 5. Packages
-
-| Operation | Description |
-|-----------|-------------|
-| Get Package | Retrieve Move package information by package ID |
-| Get Normalized Package | Get normalized package data with module information |
-| Get Package Objects | Fetch all objects created from a specific package |
-| Query Events | Query events emitted by package modules |
-
-### 6. System
+### 5. Network
 
 | Operation | Description |
 |-----------|-------------|
-| Get Chain Identifier | Retrieve the chain identifier for the network |
+| Get Chain Identifier | Retrieve the chain identifier |
 | Get Checkpoint | Get checkpoint data by sequence number |
-| Get Latest Checkpoint | Fetch the most recent checkpoint information |
-| Get Total Supply | Get total supply information for SUI tokens |
+| Get Latest Checkpoint Sequence Number | Retrieve the most recent checkpoint number |
+| Get Protocol Config | Get current protocol configuration |
 | Get Reference Gas Price | Retrieve current reference gas price |
-| Get Protocol Config | Fetch protocol configuration parameters |
+| Get Network Metrics | Get network performance and usage metrics |
 
-### 7. Unknown
+### 6. Event
 
 | Operation | Description |
 |-----------|-------------|
-| Custom RPC Call | Execute custom RPC method calls not covered by standard operations |
-| Raw Query | Send raw JSON-RPC requests to the Sui network |
+| Query Events | Search and filter blockchain events |
+| Get Events | Retrieve events by transaction digest |
+| Subscribe To Events | Set up event subscription for real-time monitoring |
+| Get Events By Module | Query events emitted by specific modules |
+| Get Events By Package | Retrieve events from specific packages |
+| Get Events By Object | Get events related to specific objects |
+
+### 7. Package
+
+| Operation | Description |
+|-----------|-------------|
+| Get Package | Retrieve Move package information |
+| Get Normalized Move Modules | Get normalized module data from a package |
+| Get Normalized Move Module | Retrieve specific normalized module |
+| Get Move Function | Get details of a specific Move function |
+| Get Normalized Move Function | Retrieve normalized Move function data |
+| Resolve Name Service Address | Resolve SuiNS names to addresses |
 
 ## Usage Examples
 
 ```javascript
-// Get transaction details
+// Get account balance for SUI tokens
 {
-  "resource": "Transactions",
-  "operation": "Get Transaction",
-  "transactionDigest": "8VLFSDeAzWX7hFpuFqTHh4c3VJ4n1ckP5xPpKQMW2Rs8",
+  "operation": "Get All Balances",
+  "address": "0x1234567890abcdef1234567890abcdef12345678",
+  "returnOnlyCoins": true
+}
+```
+
+```javascript
+// Query recent transactions for an address
+{
+  "operation": "Query Transactions",
+  "filter": {
+    "FromAddress": "0x1234567890abcdef1234567890abcdef12345678"
+  },
   "options": {
-    "showInput": true,
-    "showEffects": true,
-    "showEvents": true
+    "limit": 10,
+    "descendingOrder": true
   }
 }
 ```
 
 ```javascript
-// Query address balance
+// Get validator information and staking APY
 {
-  "resource": "Addresses", 
-  "operation": "Get Address Balance",
-  "address": "0xa1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456",
-  "coinType": "0x2::sui::SUI"
+  "operation": "Get Validator APY",
+  "epoch": null,
+  "includeValidatorInfo": true
 }
 ```
 
 ```javascript
-// Get validator information
+// Monitor events from a specific package
 {
-  "resource": "Validators",
-  "operation": "Get Validators",
-  "epoch": "current"
-}
-```
-
-```javascript
-// Query Move package details
-{
-  "resource": "Packages",
-  "operation": "Get Package", 
-  "packageId": "0x1234567890abcdef1234567890abcdef12345678",
-  "normalized": true
+  "operation": "Query Events",
+  "query": {
+    "Package": "0x2::coin"
+  },
+  "cursor": null,
+  "limit": 50,
+  "descendingOrder": true
 }
 ```
 
@@ -186,12 +196,12 @@ n8n start
 
 | Error | Description | Solution |
 |-------|-------------|----------|
-| Invalid Transaction Digest | Transaction digest format is incorrect | Verify the transaction digest is a valid base58 encoded string |
-| Object Not Found | Requested object ID does not exist | Check the object ID and ensure the object hasn't been deleted |
-| Insufficient Gas | Transaction requires more gas than provided | Increase gas budget or optimize transaction structure |
-| RPC Timeout | Request exceeded the configured timeout limit | Increase timeout value or check network connectivity |
-| Invalid Address Format | Address format does not match Sui standards | Ensure address is properly formatted with 0x prefix and correct length |
-| Epoch Not Found | Requested epoch data is not available | Use a valid epoch number or 'current' for latest epoch |
+| Invalid Address Format | Address format is incorrect or malformed | Ensure address follows Sui format (0x + 64 hex characters) |
+| Object Not Found | Requested object ID does not exist | Verify object ID and check if object was deleted |
+| Insufficient Gas | Transaction gas budget is too low | Increase gas budget or optimize transaction structure |
+| RPC Connection Failed | Unable to connect to Sui RPC endpoint | Check network connectivity and RPC URL configuration |
+| Invalid Transaction Digest | Transaction digest format is incorrect | Verify transaction digest is valid base64 string |
+| Package Not Found | Move package does not exist at specified address | Confirm package address and deployment status |
 
 ## Development
 
@@ -236,5 +246,5 @@ Contributions are welcome! Please ensure:
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/Velocity-BPA/n8n-nodes-sui/issues)
-- **Sui Documentation**: [Sui Developer Docs](https://docs.sui.io/)
-- **Sui Community**: [Sui Discord](https://discord.gg/sui)
+- **Sui Documentation**: [docs.sui.io](https://docs.sui.io)
+- **Sui RPC API Reference**: [docs.sui.io/sui-api-ref](https://docs.sui.io/sui-api-ref)
