@@ -1,30 +1,17 @@
-import {
-	ICredentialType,
-	INodeProperties,
-} from 'n8n-workflow';
+import type { ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class SuiApi implements ICredentialType {
 	name = 'suiApi';
 	displayName = 'Sui API';
-	documentationUrl = 'https://docs.sui.io/sui-jsonrpc';
+	documentationUrl = 'https://docs.sui.io/sui-api-ref';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'API Base URL',
-			name: 'apiBaseUrl',
+			displayName: 'RPC Endpoint URL',
+			name: 'rpcEndpoint',
 			type: 'string',
 			default: 'https://fullnode.mainnet.sui.io:443',
 			required: true,
-			description: 'Base URL for the Sui JSON-RPC API endpoint',
-		},
-		{
-			displayName: 'Private Key',
-			name: 'privateKey',
-			type: 'string',
-			typeOptions: {
-				password: true,
-			},
-			default: '',
-			description: 'Ed25519 or Secp256k1 private key for signing transactions (optional, only needed for transaction submission)',
+			description: 'The Sui RPC endpoint URL',
 		},
 		{
 			displayName: 'Network',
@@ -49,7 +36,24 @@ export class SuiApi implements ICredentialType {
 				},
 			],
 			default: 'mainnet',
-			description: 'Sui network to connect to',
+			description: 'The Sui network to connect to',
+		},
+		{
+			displayName: 'Private Key',
+			name: 'privateKey',
+			type: 'string',
+			typeOptions: {
+				password: true,
+			},
+			default: '',
+			description: 'Private key for signing transactions (required for write operations)',
+		},
+		{
+			displayName: 'Request Timeout',
+			name: 'timeout',
+			type: 'number',
+			default: 30000,
+			description: 'Request timeout in milliseconds',
 		},
 	];
 }
